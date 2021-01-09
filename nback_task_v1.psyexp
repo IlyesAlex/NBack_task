@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2020.1.3">
+<PsychoPy2experiment encoding="utf-8" version="2020.2.10">
   <Settings>
     <Param name="Audio latency priority" updates="None" val="use prefs" valType="str"/>
     <Param name="Audio lib" updates="None" val="use prefs" valType="str"/>
     <Param name="Completed URL" updates="None" val="" valType="str"/>
+    <Param name="Data file delimiter" updates="None" val="auto" valType="str"/>
     <Param name="Data filename" updates="None" val="u'data/%s_%s_%s' % (expInfo['Azonosító'], expName, expInfo['date'])" valType="code"/>
     <Param name="Enable Escape" updates="None" val="True" valType="bool"/>
     <Param name="Experiment info" updates="None" val="{'Azonosító': '', 'Életkor (év)': '', 'Nem': &quot;['válassz', 'férfi', 'nő', 'egyéb']&quot;, 'Domináns kéz': &quot;['válassz', 'jobb', 'bal']&quot;}" valType="code"/>
@@ -12,6 +13,7 @@
     <Param name="HTML path" updates="None" val="html" valType="str"/>
     <Param name="Incomplete URL" updates="None" val="" valType="str"/>
     <Param name="Monitor" updates="None" val="testMonitor" valType="str"/>
+    <Param name="Resources" updates="None" val="[]" valType="fileList"/>
     <Param name="Save csv file" updates="None" val="False" valType="bool"/>
     <Param name="Save excel file" updates="None" val="False" valType="bool"/>
     <Param name="Save log file" updates="None" val="True" valType="bool"/>
@@ -33,6 +35,8 @@
   <Routines>
     <Routine name="trial">
       <CodeComponent name="choose_stim">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="#stim constants&amp;#10;stim_path = &quot;stimuli/&quot;&amp;#10;stim_ext = &quot;.BMP&quot;" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="stim_path = &quot;stimuli/&quot;;&amp;#10;stim_ext = &quot;.BMP&quot;;&amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="chosen_frakt = all_blokks[level_loop.thisRepN][blokk_loop.thisRepN][trial_loop.thisRepN];&amp;#10;frakt_stim = ((stim_path + chosen_frakt) + stim_ext);&amp;#10;correct = no_ans;&amp;#10;if ((level_loop.thisRepN === 0)) {&amp;#10;    if ((trial_loop.thisRepN &gt; 0)) {&amp;#10;        if ((all_blokks[level_loop.thisRepN][blokk_loop.thisRepN][trial_loop.thisRepN] === all_blokks[level_loop.thisRepN][blokk_loop.thisRepN][(trial_loop.thisRepN - 1)])) {&amp;#10;            correct = yes_ans;&amp;#10;        } else {&amp;#10;            correct = no_ans;&amp;#10;        }&amp;#10;    }&amp;#10;} else {&amp;#10;    if ((level_loop.thisRepN === 1)) {&amp;#10;        if ((trial_loop.thisRepN &gt; 1)) {&amp;#10;            if ((all_blokks[level_loop.thisRepN][blokk_loop.thisRepN][trial_loop.thisRepN] === all_blokks[level_loop.thisRepN][blokk_loop.thisRepN][(trial_loop.thisRepN - 2)])) {&amp;#10;                correct = yes_ans;&amp;#10;            } else {&amp;#10;                correct = no_ans;&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode"/>
@@ -91,6 +95,8 @@
         <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
       </KeyboardComponent>
       <CodeComponent name="logging_custom">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -121,6 +127,8 @@
     </Routine>
     <Routine name="hello">
       <CodeComponent name="makeBlocks">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="# Online Python compiler (interpreter) to run Python online.&amp;#10;#Packages&amp;#10;import random as r&amp;#10;&amp;#10;#Global vars&amp;#10;all_stimuli_1 = [&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;,&quot;J&quot;,&quot;K&quot;,&quot;L&quot;,&quot;M&quot;,&quot;N&quot;,&quot;P&quot;,&quot;Q&quot;, &quot;R&quot;, &quot;S&quot;, &quot;T&quot;, &quot;V&quot;, &quot;W&quot;, &quot;Y&quot;, &quot;Z&quot;]&amp;#10;all_stimuli = [&quot;D&quot;,&quot;F&quot;,&quot;H&quot;,&quot;L&quot;,&quot;P&quot;,&quot;Q&quot;,&quot;Y&quot;,&quot;Z&quot;,&quot;S&quot;,&quot;J&quot;]&amp;#10;&amp;#10;PracticeTargetNum = 3&amp;#10;TargetNum = 10&amp;#10;PracticeFractals = 10&amp;#10;TrialFractals = 10&amp;#10;PracticeTrialNum = 18&amp;#10;TrialNum = 48&amp;#10;LevelNum = 2&amp;#10;BlokkNum = 2&amp;#10;&amp;#10;#function&amp;#10;#diff_num is 2 for 1-back and 3 for 2-back&amp;#10;def ensure_hits (trial_num, targ_num, diff_num):&amp;#10;    list_ready = False&amp;#10;    hit_list = [&quot;miss&quot;] * (trial_num - targ_num)&amp;#10;    &amp;#10;    while list_ready == False:&amp;#10;        hit_indexes = r.sample(range(diff_num-1, trial_num), targ_num)&amp;#10;        hit_indexes.sort()&amp;#10;        errors = []&amp;#10;        for i,x in enumerate(hit_indexes):&amp;#10;            if i &gt; 0:&amp;#10;                if (hit_indexes[i] - hit_indexes[i-1]) &lt; diff_num:&amp;#10;                    errors.append(&quot;x&quot;)&amp;#10;        if len(errors) == 0:&amp;#10;            list_ready = True&amp;#10;    &amp;#10;    for ind in hit_indexes:&amp;#10;        hit_list.insert(ind, &quot;hit&quot;)&amp;#10;        &amp;#10;    return hit_list&amp;#10;&amp;#10;def make_block(which_level, blokk_stimuli, trial_num, targ_num):&amp;#10;    completed_blokk = []&amp;#10;    &amp;#10;    if which_level == 0:&amp;#10;        hit_vector = ensure_hits(trial_num, targ_num, 2)&amp;#10;        &amp;#10;        for trial in range(trial_num):&amp;#10;            stim_for_trial = blokk_stimuli[:]&amp;#10;            &amp;#10;            if hit_vector[trial] == &quot;hit&quot;:&amp;#10;                trial_stim = completed_blokk[trial-1]&amp;#10;            else:&amp;#10;                if trial &gt; 0:&amp;#10;                    stim_for_trial.remove(completed_blokk[trial-1])&amp;#10;                if trial &gt; 1 and completed_blokk[trial-2] != completed_blokk[trial-1]:&amp;#10;                    stim_for_trial.remove(completed_blokk[trial-2])&amp;#10;                trial_stim = r.choice(stim_for_trial)&amp;#10;            &amp;#10;            completed_blokk.append(trial_stim)&amp;#10;    &amp;#10;    elif which_level == 1:&amp;#10;        hit_vector = ensure_hits(trial_num, targ_num, 3)&amp;#10;&amp;#10;        for trial in range(trial_num):&amp;#10;            stim_for_trial = blokk_stimuli[:]&amp;#10;            &amp;#10;            if hit_vector[trial] == &quot;hit&quot;:&amp;#10;                trial_stim = completed_blokk[trial-2]&amp;#10;            else:&amp;#10;                if trial &gt; 0:&amp;#10;                    stim_for_trial.remove(completed_blokk[trial-1])&amp;#10;                if trial &gt; 1:&amp;#10;                    stim_for_trial.remove(completed_blokk[trial-2])&amp;#10;                if trial &gt; 2 and completed_blokk[trial-3] != completed_blokk[trial-1]:&amp;#10;                    stim_for_trial.remove(completed_blokk[trial-3])&amp;#10;                trial_stim = r.choice(stim_for_trial)&amp;#10;            &amp;#10;            completed_blokk.append(trial_stim)&amp;#10;    &amp;#10;    return completed_blokk&amp;#10;&amp;#10;#Making blokks&amp;#10;all_blokks = []&amp;#10;for level in range(LevelNum):&amp;#10;    level_stimuli = all_stimuli[:]&amp;#10;    print(level_stimuli)&amp;#10;    completed_level = []&amp;#10;    for blokk in range(BlokkNum):&amp;#10;        blokk_stimuli = r.sample(level_stimuli, TrialFractals)&amp;#10;        print(blokk_stimuli)&amp;#10;        completed_blokk = make_block(level, blokk_stimuli, TrialNum, TargetNum)&amp;#10;        completed_level.append(completed_blokk)&amp;#10;    all_blokks.append(completed_level)&amp;#10;    &amp;#10;#making practice blokks&amp;#10;practice_blokks = []&amp;#10;for level_pract in range(LevelNum):&amp;#10;    level_stimuli_p = r.sample(all_stimuli, PracticeFractals)&amp;#10;    pract_block = make_block(level_pract, level_stimuli_p, PracticeTrialNum, PracticeTargetNum)&amp;#10;    practice_blokks.append(pract_block)&amp;#10;&amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="/* Syntax Error: Fix Python code */" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -180,6 +188,8 @@
     </Routine>
     <Routine name="level_instr">
       <CodeComponent name="choose_instr">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="/* Syntax Error: Fix Python code */" valType="extendedCode"/>
@@ -281,6 +291,8 @@
         <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
       </KeyboardComponent>
       <CodeComponent name="whichKez">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -298,6 +310,8 @@
     </Routine>
     <Routine name="level_end">
       <CodeComponent name="end_text">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="end_text = &quot;V\u00e9ge az els\u0151 feladatnak!\n\nA folytat\u00e1shoz nyomja meg a SPACE gombot.&quot;;&amp;#10;if ((level_loop.thisRepN &gt; 0)) {&amp;#10;    end_text = &quot;V\u00e9ge a feladatoknak!\n\nK\u00f6sz\u00f6nj\u00fck a r\u00e9szv\u00e9telt!\nA kil\u00e9p\u00e9shez nyomja meg a SPACE gombot!&quot;;&amp;#10;}&amp;#10;" valType="extendedCode"/>
@@ -357,6 +371,8 @@
     </Routine>
     <Routine name="practice_trial">
       <CodeComponent name="choose_pract_stim">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="chosen_frakt_p = practice_blokks[level_loop.thisRepN][practice_loop.thisRepN];&amp;#10;frakt_stim_p = ((stim_path + chosen_frakt_p) + stim_ext);&amp;#10;correct_pract = no_ans;&amp;#10;if ((level_loop.thisRepN === 0)) {&amp;#10;    if ((practice_loop.thisRepN &gt; 0)) {&amp;#10;        if ((practice_blokks[level_loop.thisRepN][practice_loop.thisRepN] === practice_blokks[level_loop.thisRepN][(practice_loop.thisRepN - 1)])) {&amp;#10;            correct_pract = yes_ans;&amp;#10;        } else {&amp;#10;            correct_pract = no_ans;&amp;#10;        }&amp;#10;    }&amp;#10;} else {&amp;#10;    if ((level_loop.thisRepN === 1)) {&amp;#10;        if ((practice_loop.thisRepN &gt; 1)) {&amp;#10;            if ((practice_blokks[level_loop.thisRepN][practice_loop.thisRepN] === practice_blokks[level_loop.thisRepN][(practice_loop.thisRepN - 2)])) {&amp;#10;                correct_pract = yes_ans;&amp;#10;            } else {&amp;#10;                correct_pract = no_ans;&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode"/>
@@ -428,6 +444,8 @@
         <Param name="syncScreenRefresh" updates="None" val="False" valType="bool"/>
       </StaticComponent>
       <CodeComponent name="logging_practice">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
@@ -445,6 +463,8 @@
     </Routine>
     <Routine name="repeatPractice">
       <CodeComponent name="pract_repeat_code">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="/* Syntax Error: Fix Python code */" valType="extendedCode"/>
@@ -504,6 +524,8 @@
     </Routine>
     <Routine name="pract_inst">
       <CodeComponent name="practi_inst_text_code">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="/* Syntax Error: Fix Python code */" valType="extendedCode"/>
@@ -563,6 +585,8 @@
     </Routine>
     <Routine name="szunet_instr">
       <CodeComponent name="szunet_text_code">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="/* Syntax Error: Fix Python code */" valType="extendedCode"/>
@@ -629,7 +653,7 @@
         <Param name="flip" updates="constant" val="" valType="str"/>
         <Param name="font" updates="constant" val="Arial" valType="str"/>
         <Param name="languageStyle" updates="None" val="LTR" valType="str"/>
-        <Param name="letterHeight" updates="constant" val="0.03" valType="code"/>
+        <Param name="letterHeight" updates="constant" val="0.05" valType="code"/>
         <Param name="name" updates="None" val="blokk_szun_text" valType="code"/>
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="ori" updates="constant" val="0" valType="code"/>
