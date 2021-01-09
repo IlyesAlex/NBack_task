@@ -1,8 +1,8 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy3 Experiment Builder (v2020.1.3),
-    on november 03, 2020, at 11:48
+This experiment was created using PsychoPy3 Experiment Builder (v2020.2.10),
+    on Sat Jan  9 13:18:01 2021
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -35,9 +35,9 @@ _thisDir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-psychopyVersion = '2020.1.3'
+psychopyVersion = '2020.2.10'
 expName = 'nback_task_v1'  # from the Builder filename that created this script
-expInfo = {'Azonosító': '', 'Születési dátum (ÉÉÉÉ.HH.NN.)': '', 'Nem': ['válassz', 'férfi', 'nő', 'egyéb'], 'Domináns kéz': ['válassz', 'jobb', 'bal']}
+expInfo = {'Azonosító': '', 'Életkor (év)': '', 'Nem': ['válassz', 'férfi', 'nő', 'egyéb'], 'Domináns kéz': ['válassz', 'jobb', 'bal']}
 dlg = gui.DlgFromDict(dictionary=expInfo, sortKeys=False, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
@@ -51,7 +51,7 @@ filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['Azonosító'], expNa
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='C:\\_ALEX_\\_Munka\\afázia\\afázia_taskok\\n_back_task\\nback_task_v1_lastrun.py',
+    originPath='/Users/variafazia/Desktop/NBack_task-master/nback_task_v1_lastrun.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -61,7 +61,7 @@ logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a f
 endExpNow = False  # flag for 'escape' or other condition => quit the exp
 frameTolerance = 0.001  # how close to onset before 'same' frame
 
-# Start Code - component code to be run before the window creation
+# Start Code - component code to be run after the window creation
 
 # Setup the Window
 win = visual.Window(
@@ -87,14 +87,15 @@ helloClock = core.Clock()
 import random as r
 
 #Global vars
-all_stimuli = ["B","C","D","F","G","H","J","K","L","M","N","P","Q", "R", "S", "T", "V", "W", "Y", "Z"]
+all_stimuli_1 = ["B","C","D","F","G","H","J","K","L","M","N","P","Q", "R", "S", "T", "V", "W", "Y", "Z"]
+all_stimuli = ["D","F","H","L","P","Q","Y","Z","S","J"]
 
 PracticeTargetNum = 3
 TargetNum = 10
-PracticeFractals = 5
+PracticeFractals = 10
 TrialFractals = 10
 PracticeTrialNum = 18
-TrialNum = 60
+TrialNum = 48
 LevelNum = 2
 BlokkNum = 2
 
@@ -169,8 +170,6 @@ for level in range(LevelNum):
     completed_level = []
     for blokk in range(BlokkNum):
         blokk_stimuli = r.sample(level_stimuli, TrialFractals)
-        for x in blokk_stimuli:
-            level_stimuli.remove(x)
         print(blokk_stimuli)
         completed_blokk = make_block(level, blokk_stimuli, TrialNum, TargetNum)
         completed_level.append(completed_blokk)
@@ -276,6 +275,17 @@ stim_frakt = visual.ImageStim(
     texRes=128, interpolate=True, depth=-1.0)
 key_resp = keyboard.Keyboard()
 trial_ISI = clock.StaticPeriod(win=win, screenHz=expInfo['frameRate'], name='trial_ISI')
+
+# Initialize components for Routine "blokk_szun"
+blokk_szunClock = core.Clock()
+blokk_szun_text = visual.TextStim(win=win, name='blokk_szun_text',
+    text='Szünet!\n\nNyomjon SPACE-t a folytatáshoz!',
+    font='Arial',
+    pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
+    color='black', colorSpace='rgb', opacity=1, 
+    languageStyle='LTR',
+    depth=0.0);
+blokk_szun_resp = keyboard.Keyboard()
 
 # Initialize components for Routine "level_end"
 level_endClock = core.Clock()
@@ -873,6 +883,7 @@ for thisLevel_loop in level_loop:
                     pract_stim_frakt.setImage(frakt_stim_p)
                     # component updates done
                     ISI.complete()  # finish the static period
+                    ISI.tStop = ISI.tStart + 0.3  # record stop time
                 
                 # check for quit (typically the Esc key)
                 if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1327,6 +1338,7 @@ for thisLevel_loop in level_loop:
                     stim_frakt.setImage(frakt_stim)
                     # component updates done
                     trial_ISI.complete()  # finish the static period
+                    trial_ISI.tStop = trial_ISI.tStart + 0.3  # record stop time
                 
                 # check for quit (typically the Esc key)
                 if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1409,6 +1421,101 @@ for thisLevel_loop in level_loop:
             
         # completed TrialNum repeats of 'trial_loop'
         
+        
+        # ------Prepare to start Routine "blokk_szun"-------
+        continueRoutine = True
+        # update component parameters for each repeat
+        blokk_szun_resp.keys = []
+        blokk_szun_resp.rt = []
+        _blokk_szun_resp_allKeys = []
+        # keep track of which components have finished
+        blokk_szunComponents = [blokk_szun_text, blokk_szun_resp]
+        for thisComponent in blokk_szunComponents:
+            thisComponent.tStart = None
+            thisComponent.tStop = None
+            thisComponent.tStartRefresh = None
+            thisComponent.tStopRefresh = None
+            if hasattr(thisComponent, 'status'):
+                thisComponent.status = NOT_STARTED
+        # reset timers
+        t = 0
+        _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+        blokk_szunClock.reset(-_timeToFirstFrame)  # t0 is time of first possible flip
+        frameN = -1
+        
+        # -------Run Routine "blokk_szun"-------
+        while continueRoutine:
+            # get current time
+            t = blokk_szunClock.getTime()
+            tThisFlip = win.getFutureFlipTime(clock=blokk_szunClock)
+            tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+            frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+            # update/draw components on each frame
+            
+            # *blokk_szun_text* updates
+            if blokk_szun_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                blokk_szun_text.frameNStart = frameN  # exact frame index
+                blokk_szun_text.tStart = t  # local t and not account for scr refresh
+                blokk_szun_text.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(blokk_szun_text, 'tStartRefresh')  # time at next scr refresh
+                blokk_szun_text.setAutoDraw(True)
+            
+            # *blokk_szun_resp* updates
+            waitOnFlip = False
+            if blokk_szun_resp.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                blokk_szun_resp.frameNStart = frameN  # exact frame index
+                blokk_szun_resp.tStart = t  # local t and not account for scr refresh
+                blokk_szun_resp.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(blokk_szun_resp, 'tStartRefresh')  # time at next scr refresh
+                blokk_szun_resp.status = STARTED
+                # keyboard checking is just starting
+                waitOnFlip = True
+                win.callOnFlip(blokk_szun_resp.clock.reset)  # t=0 on next screen flip
+                win.callOnFlip(blokk_szun_resp.clearEvents, eventType='keyboard')  # clear events on next screen flip
+            if blokk_szun_resp.status == STARTED and not waitOnFlip:
+                theseKeys = blokk_szun_resp.getKeys(keyList=['space'], waitRelease=False)
+                _blokk_szun_resp_allKeys.extend(theseKeys)
+                if len(_blokk_szun_resp_allKeys):
+                    blokk_szun_resp.keys = [key.name for key in _blokk_szun_resp_allKeys]  # storing all keys
+                    blokk_szun_resp.rt = [key.rt for key in _blokk_szun_resp_allKeys]
+                    # a response ends the routine
+                    continueRoutine = False
+            
+            # check for quit (typically the Esc key)
+            if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
+                core.quit()
+            
+            # check if all components have finished
+            if not continueRoutine:  # a component has requested a forced-end of Routine
+                break
+            continueRoutine = False  # will revert to True if at least one component still running
+            for thisComponent in blokk_szunComponents:
+                if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                    continueRoutine = True
+                    break  # at least one component has not yet finished
+            
+            # refresh the screen
+            if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+                win.flip()
+        
+        # -------Ending Routine "blokk_szun"-------
+        for thisComponent in blokk_szunComponents:
+            if hasattr(thisComponent, "setAutoDraw"):
+                thisComponent.setAutoDraw(False)
+        blokk_loop.addData('blokk_szun_text.started', blokk_szun_text.tStartRefresh)
+        blokk_loop.addData('blokk_szun_text.stopped', blokk_szun_text.tStopRefresh)
+        # check responses
+        if blokk_szun_resp.keys in ['', [], None]:  # No response was made
+            blokk_szun_resp.keys = None
+        blokk_loop.addData('blokk_szun_resp.keys',blokk_szun_resp.keys)
+        if blokk_szun_resp.keys != None:  # we had a response
+            blokk_loop.addData('blokk_szun_resp.rt', blokk_szun_resp.rt)
+        blokk_loop.addData('blokk_szun_resp.started', blokk_szun_resp.tStartRefresh)
+        blokk_loop.addData('blokk_szun_resp.stopped', blokk_szun_resp.tStopRefresh)
+        # the Routine "blokk_szun" was not non-slip safe, so reset the non-slip timer
+        routineTimer.reset()
         thisExp.nextEntry()
         
     # completed BlokkNum repeats of 'blokk_loop'
@@ -1522,7 +1629,7 @@ for thisLevel_loop in level_loop:
 win.flip()
 
 # these shouldn't be strictly necessary (should auto-save)
-thisExp.saveAsWideText(filename+'.csv')
+thisExp.saveAsWideText(filename+'.csv', delim='auto')
 thisExp.saveAsPickle(filename)
 logging.flush()
 # make sure everything is closed down
