@@ -1,8 +1,8 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy3 Experiment Builder (v2020.2.10),
-    on Sat Jan  9 13:18:01 2021
+This experiment was created using PsychoPy3 Experiment Builder (v2021.1.2),
+    on március 10, 2021, at 12:23
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -15,14 +15,14 @@ from __future__ import absolute_import, division
 
 from psychopy import locale_setup
 from psychopy import prefs
-from psychopy import sound, gui, visual, core, data, event, logging, clock
+from psychopy import sound, gui, visual, core, data, event, logging, clock, colors
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
 
 import numpy as np  # whole numpy lib is available, prepend 'np.'
 from numpy import (sin, cos, tan, log, log10, pi, average,
                    sqrt, std, deg2rad, rad2deg, linspace, asarray)
-from numpy.random import random, randint, normal, shuffle
+from numpy.random import random, randint, normal, shuffle, choice as randchoice
 import os  # handy system and path functions
 import sys  # to get file system encoding
 
@@ -35,7 +35,7 @@ _thisDir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-psychopyVersion = '2020.2.10'
+psychopyVersion = '2021.1.2'
 expName = 'nback_task_v1'  # from the Builder filename that created this script
 expInfo = {'Azonosító': '', 'Életkor (év)': '', 'Nem': ['válassz', 'férfi', 'nő', 'egyéb'], 'Domináns kéz': ['válassz', 'jobb', 'bal']}
 dlg = gui.DlgFromDict(dictionary=expInfo, sortKeys=False, title=expName)
@@ -51,7 +51,7 @@ filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['Azonosító'], expNa
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='/Users/variafazia/Desktop/NBack_task-master/nback_task_v1_lastrun.py',
+    originPath='C:\\_ALEX_\\_Munka\\afázia\\afázia_taskok\\n_back_task\\nback_task_v1_lastrun.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -206,7 +206,7 @@ kezesseg_resp = keyboard.Keyboard()
 # Initialize components for Routine "level_instr"
 level_instrClock = core.Clock()
 lvl_instr = visual.TextStim(win=win, name='lvl_instr',
-    text='default text',
+    text='',
     font='Arial',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='black', colorSpace='rgb', opacity=1, 
@@ -217,7 +217,7 @@ key_resp_2 = keyboard.Keyboard()
 # Initialize components for Routine "pract_inst"
 pract_instClock = core.Clock()
 pract_inst_text = visual.TextStim(win=win, name='pract_inst_text',
-    text='default text',
+    text='',
     font='Arial',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='black', colorSpace='rgb', opacity=1, 
@@ -241,7 +241,7 @@ ISI = clock.StaticPeriod(win=win, screenHz=expInfo['frameRate'], name='ISI')
 # Initialize components for Routine "repeatPractice"
 repeatPracticeClock = core.Clock()
 repeat_pract_text = visual.TextStim(win=win, name='repeat_pract_text',
-    text='default text',
+    text='',
     font='Arial',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='black', colorSpace='rgb', opacity=1, 
@@ -252,7 +252,7 @@ repeat_practice_key = keyboard.Keyboard()
 # Initialize components for Routine "szunet_instr"
 szunet_instrClock = core.Clock()
 szunet_text = visual.TextStim(win=win, name='szunet_text',
-    text='default text',
+    text='',
     font='Arial',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='black', colorSpace='rgb', opacity=1, 
@@ -290,7 +290,7 @@ blokk_szun_resp = keyboard.Keyboard()
 # Initialize components for Routine "level_end"
 level_endClock = core.Clock()
 text = visual.TextStim(win=win, name='text',
-    text='default text',
+    text='',
     font='Arial',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='black', colorSpace='rgb', opacity=1, 
@@ -495,12 +495,14 @@ thisExp.nextEntry()
 if "b" in kezesseg_resp.keys:
     yes_ans = 'e'
     no_ans = 'r'
-    ans_options = [yes_ans, no_ans]
+    ans_options = [yes_ans]
+    ans_options2 = [yes_ans, no_ans]
     
 elif "j" in kezesseg_resp.keys:
     yes_ans = 'u'
     no_ans = 'i'
-    ans_options = [yes_ans, no_ans]
+    ans_options = [yes_ans]
+    ans_options2 = [yes_ans, no_ans]
 # the Routine "kezesseg" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
 
@@ -529,9 +531,9 @@ for thisLevel_loop in level_loop:
     #Instr based on level
     task_instr_level = ""
     if level_loop.thisRepN == 0:
-        task_instr_level = "Ebben a feladatban képek fognak megjelenni egymás után a képernyőn. Egyszerre egy kép fog megjelenni.\n\nNyomja meg a(z) {} betűt, ha a kép ugyanaz, mint amit eggyel korábban látott!\nA többi esetben, amikor a kép nem egyezik meg az eggyel korábbival, nyomja meg az {} betűt.\n\nA képek gyorsan jönnek egymás után, úgyhogy gyorsnak kell lennie.\nNyomjon SPACE gombot a továbblépéshez!".format(yes_ans.upper(), no_ans.upper())
+        task_instr_level = "Ebben a feladatban képek fognak megjelenni egymás után a képernyőn. Egyszerre egy kép fog megjelenni.\n\nNyomja meg a(z) {} betűt, ha a kép ugyanaz, mint amit eggyel korábban látott!\nA többi esetben, amikor a kép nem egyezik meg az eggyel korábbival, ne nyomjon semmilyen gombot!\n\nA képek gyorsan jönnek egymás után, úgyhogy gyorsnak kell lennie.\nNyomjon SPACE gombot a továbblépéshez!".format(yes_ans.upper())
     elif level_loop.thisRepN == 1:
-        task_instr_level = "Ebben a feladatban is képeket fog látni.\n\nNyomja meg a(z) {} betűt, ha a kép ugyanaz, mint amit kettővel korábban látott!\nA többi esetben, amikor a kép nem egyezik meg a kettővel korábbival, nyomja meg az {} betűt.\n\nA képek gyorsan jönnek egymás után, úgyhogy gyorsnak kell lennie.\nNyomjon SPACE gombot a továbblépéshez!".format(yes_ans.upper(), no_ans.upper())
+        task_instr_level = "Ebben a feladatban is képeket fog látni.\n\nNyomja meg a(z) {} betűt, ha a kép ugyanaz, mint amit kettővel korábban látott!\nA többi esetben, amikor a kép nem egyezik meg a kettővel korábbival, ne nyomjon semmilyen gombot!\n\nA képek gyorsan jönnek egymás után, úgyhogy gyorsnak kell lennie.\nNyomjon SPACE gombot a továbblépéshez!".format(yes_ans.upper())
     lvl_instr.setText(task_instr_level)
     key_resp_2.keys = []
     key_resp_2.rt = []
@@ -650,9 +652,9 @@ for thisLevel_loop in level_loop:
         #Instr based on level
         pract_inst_textstim = ""
         if level_loop.thisRepN == 0:
-            pract_inst_textstim = "Gyakorló feladat\n\nNyomja meg a(z) {} betűt, ha a kép ugyanaz, mint amit eggyel korábban látott!\nA többi esetben, amikor a kép nem egyezik meg az eggyel korábbival, nyomja meg az {} betűt.\n\nNyomjon SPACE gombot a továbblépéshez!".format(yes_ans.upper(), no_ans.upper())
+            pract_inst_textstim = "Gyakorló feladat\n\nNyomja meg a(z) {} betűt, ha a kép ugyanaz, mint amit eggyel korábban látott!\nA többi esetben ne nyomjon semmilyen gombot!\n\nNyomjon SPACE gombot a továbblépéshez!".format(yes_ans.upper())
         elif level_loop.thisRepN == 1:
-            pract_inst_textstim = "Gyakorló feladat\n\nNyomja meg a(z) {} betűt, ha a kép ugyanaz, mint amit kettővel korábban látott!\nA többi esetben, amikor a kép nem egyezik meg a kettővel korábbival, nyomja meg az {} betűt.\n\nNyomjon SPACE gombot a továbblépéshez!".format(yes_ans.upper(), no_ans.upper())
+            pract_inst_textstim = "Gyakorló feladat\n\nNyomja meg a(z) {} betűt, ha a kép ugyanaz, mint amit kettővel korábban látott!\nA többi esetben ne nyomjon semmilyen gombot!\n\nNyomjon SPACE gombot a továbblépéshez!".format(yes_ans.upper())
         pract_inst_text.setText(pract_inst_textstim)
         pract_inst_key.keys = []
         pract_inst_key.rt = []
@@ -776,19 +778,19 @@ for thisLevel_loop in level_loop:
             
             
             #correct_ans
-            correct_pract = no_ans
+            correct_pract = "no"
             if level_loop.thisRepN == 0:
                 if practice_loop.thisRepN > 0:
                     if practice_blokks[level_loop.thisRepN][practice_loop.thisRepN] == practice_blokks[level_loop.thisRepN][practice_loop.thisRepN-1]:
                         correct_pract = yes_ans
                     else:
-                        correct_pract = no_ans
+                        correct_pract = "no"
             elif level_loop.thisRepN == 1:
                 if practice_loop.thisRepN > 1:
                     if practice_blokks[level_loop.thisRepN][practice_loop.thisRepN] == practice_blokks[level_loop.thisRepN][practice_loop.thisRepN-2]:
                         correct_pract = yes_ans
                     else:
-                        correct_pract = no_ans
+                        correct_pract = "no"
             pract_resp.keys = []
             pract_resp.rt = []
             _pract_resp_allKeys = []
@@ -817,7 +819,7 @@ for thisLevel_loop in level_loop:
                 # update/draw components on each frame
                 #force end if answer is yes or no
                 if len(pract_resp.keys) > 0:
-                    if (pract_resp.keys[-1] == yes_ans or pract_resp.keys[-1] == no_ans):
+                    if (pract_resp.keys[-1] == yes_ans):
                         continueRoutine = False
                 
                 
@@ -937,7 +939,7 @@ for thisLevel_loop in level_loop:
             
             if pract_resp.keys is not None:
                 what_resp = "else"
-                if yes_ans in pract_resp.keys or no_ans in pract_resp.keys:
+                if yes_ans in pract_resp.keys:
                     what_resp = pract_resp.keys[-1]
                     RT_resp = pract_resp.rt[-1]
             
@@ -951,13 +953,13 @@ for thisLevel_loop in level_loop:
             if correct_pract == yes_ans and what_resp == yes_ans:
                 ans_type = "hit"
                 correctness = 1
-            elif correct_pract == yes_ans and what_resp == no_ans:
+            elif correct_pract == yes_ans and what_resp == "no_resp":
                 ans_type = "miss"
                 correctness = 0
-            elif correct_pract == no_ans and what_resp == no_ans:
+            elif correct_pract == "no" and what_resp == "no_resp":
                 ans_type = "correct rejection"
                 correctness = 1
-            elif correct_pract == no_ans and what_resp == yes_ans:
+            elif correct_pract == "no" and what_resp == yes_ans:
                 ans_type = "false alarm"
                 correctness = 0
             
@@ -1018,21 +1020,21 @@ for thisLevel_loop in level_loop:
                 repeat_practice_key.tStartRefresh = tThisFlipGlobal  # on global time
                 win.timeOnFlip(repeat_practice_key, 'tStartRefresh')  # time at next scr refresh
                 repeat_practice_key.status = STARTED
-                # AllowedKeys looks like a variable named `ans_options`
-                if not type(ans_options) in [list, tuple, np.ndarray]:
-                    if not isinstance(ans_options, str):
-                        logging.error('AllowedKeys variable `ans_options` is not string- or list-like.')
+                # AllowedKeys looks like a variable named `ans_options2`
+                if not type(ans_options2) in [list, tuple, np.ndarray]:
+                    if not isinstance(ans_options2, str):
+                        logging.error('AllowedKeys variable `ans_options2` is not string- or list-like.')
                         core.quit()
-                    elif not ',' in ans_options:
-                        ans_options = (ans_options,)
+                    elif not ',' in ans_options2:
+                        ans_options2 = (ans_options2,)
                     else:
-                        ans_options = eval(ans_options)
+                        ans_options2 = eval(ans_options2)
                 # keyboard checking is just starting
                 waitOnFlip = True
                 win.callOnFlip(repeat_practice_key.clock.reset)  # t=0 on next screen flip
                 win.callOnFlip(repeat_practice_key.clearEvents, eventType='keyboard')  # clear events on next screen flip
             if repeat_practice_key.status == STARTED and not waitOnFlip:
-                theseKeys = repeat_practice_key.getKeys(keyList=list(ans_options), waitRelease=False)
+                theseKeys = repeat_practice_key.getKeys(keyList=list(ans_options2), waitRelease=False)
                 _repeat_practice_key_allKeys.extend(theseKeys)
                 if len(_repeat_practice_key_allKeys):
                     repeat_practice_key.keys = _repeat_practice_key_allKeys[-1].name  # just the last key pressed
@@ -1086,9 +1088,9 @@ for thisLevel_loop in level_loop:
     #Instr based on level
     szunet_instr_text = ""
     if level_loop.thisRepN == 0:
-        szunet_instr_text = "Szünet!\n\nTovábblépéskor kezdődik a feladat.\nNyomja meg a(z) {} betűt, ha a kép ugyanaz, mint amit eggyel korábban látott!\nA többi esetben, amikor a kép nem egyezik meg az eggyel korábbival, nyomja meg az {} betűt.\n\nA képek gyorsan jönnek egymás után, úgyhogy gyorsnak kell lennie.\nNyomjon SPACE gombot a továbblépéshez!".format(yes_ans.upper(), no_ans.upper())
+        szunet_instr_text = "Szünet!\n\nTovábblépéskor kezdődik a feladat.\nNyomja meg a(z) {} betűt, ha a kép ugyanaz, mint amit eggyel korábban látott!\nA többi esetben, amikor a kép nem egyezik meg az eggyel korábbival, ne nyomjon semmilyen gombot!\n\nA képek gyorsan jönnek egymás után, úgyhogy gyorsnak kell lennie.\nNyomjon SPACE gombot a továbblépéshez!".format(yes_ans.upper())
     elif level_loop.thisRepN == 1:
-        szunet_instr_text = "Szünet!\n\nTovábblépéskor kezdődik a feladat.\nNyomja meg a(z) {} betűt, ha a kép ugyanaz, mint amit kettővel korábban látott!\nA többi esetben, amikor a kép nem egyezik meg a kettővel korábbival, nyomja meg az {} betűt.\n\nA képek gyorsan jönnek egymás után, úgyhogy gyorsnak kell lennie.\nNyomjon SPACE gombot a továbblépéshez!".format(yes_ans.upper(), no_ans.upper())
+        szunet_instr_text = "Szünet!\n\nTovábblépéskor kezdődik a feladat.\nNyomja meg a(z) {} betűt, ha a kép ugyanaz, mint amit kettővel korábban látott!\nA többi esetben, amikor a kép nem egyezik meg a kettővel korábbival, ne nyomjon semmilyen gombot!\n\nA képek gyorsan jönnek egymás után, úgyhogy gyorsnak kell lennie.\nNyomjon SPACE gombot a továbblépéshez!".format(yes_ans.upper())
     szunet_text.setText(szunet_instr_text)
     szunet_key.keys = []
     szunet_key.rt = []
@@ -1231,19 +1233,19 @@ for thisLevel_loop in level_loop:
             
             
             #correct_ans
-            correct = no_ans
+            correct = "no"
             if level_loop.thisRepN == 0:
                 if trial_loop.thisRepN > 0:
                     if all_blokks[level_loop.thisRepN][blokk_loop.thisRepN][trial_loop.thisRepN] == all_blokks[level_loop.thisRepN][blokk_loop.thisRepN][trial_loop.thisRepN-1]:
                         correct = yes_ans
                     else:
-                        correct = no_ans
+                        correct = "no"
             elif level_loop.thisRepN == 1:
                 if trial_loop.thisRepN > 1:
                     if all_blokks[level_loop.thisRepN][blokk_loop.thisRepN][trial_loop.thisRepN] == all_blokks[level_loop.thisRepN][blokk_loop.thisRepN][trial_loop.thisRepN-2]:
                         correct = yes_ans
                     else:
-                        correct = no_ans
+                        correct = "no"
             key_resp.keys = []
             key_resp.rt = []
             _key_resp_allKeys = []
@@ -1272,7 +1274,7 @@ for thisLevel_loop in level_loop:
                 # update/draw components on each frame
                 #force end if answer is yes or no
                 if len(key_resp.keys) > 0:
-                    if (key_resp.keys[-1] == yes_ans or key_resp.keys[-1] == no_ans):
+                    if (key_resp.keys[-1] == yes_ans):
                         continueRoutine = False
                 
                 
@@ -1390,7 +1392,7 @@ for thisLevel_loop in level_loop:
             
             if key_resp.keys is not None:
                 what_resp = "else"
-                if yes_ans in key_resp.keys or no_ans in key_resp.keys:
+                if yes_ans in key_resp.keys:
                     what_resp = key_resp.keys[-1]
                     RT_resp = key_resp.rt[-1]
             
@@ -1403,13 +1405,13 @@ for thisLevel_loop in level_loop:
             if correct == yes_ans and what_resp == yes_ans:
                 ans_type = "hit"
                 correctness = 1
-            elif correct == yes_ans and what_resp == no_ans:
+            elif correct == yes_ans and what_resp == "no_resp":
                 ans_type = "miss"
                 correctness = 0
-            elif correct == no_ans and what_resp == no_ans:
+            elif correct == "no" and what_resp == "no_resp":
                 ans_type = "correct rejection"
                 correctness = 1
-            elif correct == no_ans and what_resp == yes_ans:
+            elif correct == "no" and what_resp == yes_ans:
                 ans_type = "false alarm"
                 correctness = 0
             
