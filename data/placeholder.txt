@@ -1,0 +1,1 @@
+Placeholder because git cannot initialize empty folder
