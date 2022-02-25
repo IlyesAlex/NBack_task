@@ -1,8 +1,8 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy3 Experiment Builder (v2020.2.10),
-    on Sat Jan  9 13:18:01 2021
+This experiment was created using PsychoPy3 Experiment Builder (v2021.1.2),
+    on február 25, 2022, at 12:00
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -15,14 +15,14 @@ from __future__ import absolute_import, division
 
 from psychopy import locale_setup
 from psychopy import prefs
-from psychopy import sound, gui, visual, core, data, event, logging, clock
+from psychopy import sound, gui, visual, core, data, event, logging, clock, colors
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
 
 import numpy as np  # whole numpy lib is available, prepend 'np.'
 from numpy import (sin, cos, tan, log, log10, pi, average,
                    sqrt, std, deg2rad, rad2deg, linspace, asarray)
-from numpy.random import random, randint, normal, shuffle
+from numpy.random import random, randint, normal, shuffle, choice as randchoice
 import os  # handy system and path functions
 import sys  # to get file system encoding
 
@@ -35,7 +35,7 @@ _thisDir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-psychopyVersion = '2020.2.10'
+psychopyVersion = '2021.1.2'
 expName = 'nback_task_v1'  # from the Builder filename that created this script
 expInfo = {'Azonosító': '', 'Életkor (év)': '', 'Nem': ['válassz', 'férfi', 'nő', 'egyéb'], 'Domináns kéz': ['válassz', 'jobb', 'bal']}
 dlg = gui.DlgFromDict(dictionary=expInfo, sortKeys=False, title=expName)
@@ -51,7 +51,7 @@ filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['Azonosító'], expNa
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='/Users/variafazia/Desktop/NBack_task-master/nback_task_v1_lastrun.py',
+    originPath='C:\\_ALEX_\\_Munka\\afázia\\afázia_taskok\\n_back_task\\nback_task_v1_lastrun.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -206,7 +206,7 @@ kezesseg_resp = keyboard.Keyboard()
 # Initialize components for Routine "level_instr"
 level_instrClock = core.Clock()
 lvl_instr = visual.TextStim(win=win, name='lvl_instr',
-    text='default text',
+    text='',
     font='Arial',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='black', colorSpace='rgb', opacity=1, 
@@ -217,7 +217,7 @@ key_resp_2 = keyboard.Keyboard()
 # Initialize components for Routine "pract_inst"
 pract_instClock = core.Clock()
 pract_inst_text = visual.TextStim(win=win, name='pract_inst_text',
-    text='default text',
+    text='',
     font='Arial',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='black', colorSpace='rgb', opacity=1, 
@@ -241,7 +241,7 @@ ISI = clock.StaticPeriod(win=win, screenHz=expInfo['frameRate'], name='ISI')
 # Initialize components for Routine "repeatPractice"
 repeatPracticeClock = core.Clock()
 repeat_pract_text = visual.TextStim(win=win, name='repeat_pract_text',
-    text='default text',
+    text='',
     font='Arial',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='black', colorSpace='rgb', opacity=1, 
@@ -252,7 +252,7 @@ repeat_practice_key = keyboard.Keyboard()
 # Initialize components for Routine "szunet_instr"
 szunet_instrClock = core.Clock()
 szunet_text = visual.TextStim(win=win, name='szunet_text',
-    text='default text',
+    text='',
     font='Arial',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='black', colorSpace='rgb', opacity=1, 
@@ -290,7 +290,7 @@ blokk_szun_resp = keyboard.Keyboard()
 # Initialize components for Routine "level_end"
 level_endClock = core.Clock()
 text = visual.TextStim(win=win, name='text',
-    text='default text',
+    text='',
     font='Arial',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0, 
     color='black', colorSpace='rgb', opacity=1, 
@@ -933,10 +933,13 @@ for thisLevel_loop in level_loop:
             
             #logging answer_key
             what_resp = "no_resp"
+            ans_type = "none"
             RT_resp = None
+            correctness = 0
             
             if pract_resp.keys is not None:
                 what_resp = "else"
+                ans_type = "else"
                 if yes_ans in pract_resp.keys or no_ans in pract_resp.keys:
                     what_resp = pract_resp.keys[-1]
                     RT_resp = pract_resp.rt[-1]
@@ -946,8 +949,7 @@ for thisLevel_loop in level_loop:
             thisExp.addData("Answer RT", RT_resp)
             
             #logging correctness
-            ans_type = None
-            correctness = None
+            
             if correct_pract == yes_ans and what_resp == yes_ans:
                 ans_type = "hit"
                 correctness = 1
@@ -1386,10 +1388,13 @@ for thisLevel_loop in level_loop:
             
             #logging answer_key
             what_resp = "no_resp"
+            ans_type = "none"
             RT_resp = None
+            correctness = 0
             
             if key_resp.keys is not None:
                 what_resp = "else"
+                ans_type = "else"
                 if yes_ans in key_resp.keys or no_ans in key_resp.keys:
                     what_resp = key_resp.keys[-1]
                     RT_resp = key_resp.rt[-1]
@@ -1399,7 +1404,7 @@ for thisLevel_loop in level_loop:
             thisExp.addData("Answer RT", RT_resp)
             
             #logging correctness
-            ans_type = "else"
+            
             if correct == yes_ans and what_resp == yes_ans:
                 ans_type = "hit"
                 correctness = 1
